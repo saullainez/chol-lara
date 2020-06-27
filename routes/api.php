@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middlweare' => 'cors'], function (){
     Route::post('login', 'Auth@doLogin');
+    Route::post('logout', 'Auth@doLogout');
 });
