@@ -14,17 +14,17 @@ class Auth extends Controller
 {
     /**
      * SALG Función para Iniciar sesión en el sistema, crea el token y la sesión
-     * @param $request vienen los datos de email y contraseña del usuario
+     * @param request vienen los datos de email y contraseña del usuario
      * Retorna validate = false si no se puede iniciar sesión
      * Retorna un json con los datos de la sesión, si el login fue correcto
      */
 
     public function doLogin(Request $request){
         //SALG obtener los parámetros para validar el login
-        $email = $request->input("email");
+        $username = $request->input("username");
         $pass = $request->input("password");
         //SALG obtenemos el usuario, si no existe, retornamos validate = false
-        $user = User::where('email', $email)->first();
+        $user = User::where('username', $username)->first();
         if($user){
             //SALG si el usuario existe, comprobamos si las contraseñas son iguales, si no, retornamos validate = false
             if (Hash::check($pass, $user->password)){
@@ -36,13 +36,14 @@ class Auth extends Controller
                 $expires_at = Carbon::now()->addMinutes($sys_param->session_time);
                 $token->expires_at = $expires_at;
                 $token->save();
-                Session::put('user_session', $user->name);
+                Session::put('user_session', $user->username);
                 return response()->json([
                     'validate' => true,
                     'token' => $token->id,
                     'expires_at' => Carbon::parse($expires_at),
-                    'username' => $user->name,
-                    'email' => $user->email
+                    'username' => $user->username,
+                    'email' => $user->email,
+                    'role_prefix' => $user->role_prefix
                 ], 200);
             }else{
                 return response()->json(['validate' => false]);
