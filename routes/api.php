@@ -24,4 +24,5 @@ Route::group(['middlweare' => 'cors'], function (){
     Route::post('logout', 'Auth@doLogout');
     //SALG MÓDULOS
     Route::get('modules', 'ModuleController@allModules'); //Obtener todos los módulos
+    Route::get('modules/{role}', 'ModuleController@roleModules'); //Obtener los módulos para ese rol
 });
