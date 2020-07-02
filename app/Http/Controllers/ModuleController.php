@@ -26,6 +26,8 @@ class ModuleController extends Controller
         'module.background', 'module.uri')
         ->join('module as module', 'module.name', 'role_module.module_name')
         ->where('role_module.rol_prefix', $role)
+        //->join('role as role', 'role.prefix', 'role_module.rol_prefix')
+        ->where('role_module.estatus', 'A')
         ->get();
         return response()->json($roleModules, 200);
     }
