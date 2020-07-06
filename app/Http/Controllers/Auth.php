@@ -43,7 +43,10 @@ class Auth extends Controller
                     'expires_at' => Carbon::parse($expires_at),
                     'username' => $user->username,
                     'email' => $user->email,
-                    'role_prefix' => $user->role_prefix
+                    'role_prefix' => $user->role_prefix,
+                    'app_name' => $sys_param->app_name,
+                    'version' => $sys_param->version,
+                    'sys_date' => $sys_param->sys_date
                 ], 200);
             }else{
                 return response()->json(['validate' => false]);
