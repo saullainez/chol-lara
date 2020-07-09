@@ -1,0 +1,13 @@
+{
+    "name": "Seg",
+    "alias": "seg",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Seg\\Providers\\SegServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
