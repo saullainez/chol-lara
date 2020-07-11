@@ -24,6 +24,7 @@ class SegDashboardController extends Controller
             'usersCount' => $usersCount, 
             'rolesCount' => $rolesCount,
             'modulesCount' => $modulesCount,
-            'rolModulesCount' => $rolModulesCount]);
+            'rolModulesCount' => $rolModulesCount
+        ]);
     }
 }

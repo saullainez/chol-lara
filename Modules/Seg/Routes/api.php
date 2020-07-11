@@ -21,5 +21,8 @@ Route::group(['middlweare' => 'cors'], function (){
     Route::prefix('seg')->group(function(){
         //SALG Obtener información para el dashboard
         Route::get('dash_info', 'SegDashboardController@getDashboardInfo');
+
+        //SALG Obtener los permisos de los módulos
+        Route::get('menu_permission/{module}/{role}', 'MenuController@getMenuPermission');
     });
 });
