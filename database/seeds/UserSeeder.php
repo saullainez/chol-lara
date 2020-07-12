@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
             'email' => 'saullainez@hotmail.es',
             'password' => Hash::make('password'),
             'username' => 'slainez',
-            'role_prefix' => 'Admin'
+            'role_prefix' => 'Admin',
+            'estatus' => 'A'
         ]);
             
     }

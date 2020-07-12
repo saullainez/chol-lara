@@ -10,7 +10,8 @@ use Illuminate\Routing\Controller;
 class UsersController extends Controller
 {
     public function getUsers(){
-        $users = User::select('id', 'name', 'email', 'role_prefix', 'username')->get();
+        $users = User::select('id', 'name', 'email', 'role_prefix', 'username')
+        ->where('estatus', 'A')->get();
         return response()->json([
             'users' => $users
          ]);
