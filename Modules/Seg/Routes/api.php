@@ -25,7 +25,10 @@ Route::group(['middlweare' => 'cors'], function (){
         //SALG Obtener los permisos de los módulos
         Route::get('menu_permission/{module}/{role}', 'MenuController@getMenuPermission');
 
-        //SALG Obtener los usuarios
+        //SALG Rutas para usuarios
+        //Obtener los usuarios
         Route::get('users', 'UsersController@getUsers');
+        //Desactivar los usuarios
+        Route::delete('users/{id}', 'UsersController@deactivateUser');
     });
 });

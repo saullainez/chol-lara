@@ -16,4 +16,16 @@ class UsersController extends Controller
             'users' => $users
          ]);
     }
+
+    public function deactivateUser($id) {
+        $user = User::where('id', $id)->first();
+        $user->estatus = 'I';
+        $user->save();
+        $users = User::select('id', 'name', 'email', 'role_prefix', 'username')
+        ->where('estatus', 'A')->get();
+        return response()->json([
+            'success' => true,
+            'users' => $users
+         ]);
+    }
 }
