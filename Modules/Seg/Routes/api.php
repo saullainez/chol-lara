@@ -30,5 +30,16 @@ Route::group(['middlweare' => 'cors'], function (){
         Route::get('users', 'UsersController@getUsers');
         //Desactivar los usuarios
         Route::delete('users/{id}', 'UsersController@deactivateUser');
+        //Obtener dato de un usuario
+        Route::get('user/{id}', 'UsersController@getUser');
+        //Guardar un usuario
+        Route::post('users', 'UsersController@saveUser');
+        //Editar un usuario
+        Route::put('users', 'UsersController@editUser');
+
+        //SALG Rutas para roles
+        //Obtener los roles
+        Route::get('roles-select', 'RolesController@getRolesSelect');
+        Route::get('roles', 'RolesController@getRoles');
     });
 });
