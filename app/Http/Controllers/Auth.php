@@ -24,7 +24,8 @@ class Auth extends Controller
         $username = $request->input("username");
         $pass = $request->input("password");
         //SALG obtenemos el usuario, si no existe, retornamos validate = false
-        $user = User::where('username', $username)->first();
+        $user = User::where('username', $username)
+        ->where('estatus', 'A')->first();
         if($user){
             //SALG si el usuario existe, comprobamos si las contraseñas son iguales, si no, retornamos validate = false
             if (Hash::check($pass, $user->password)){
@@ -43,7 +44,10 @@ class Auth extends Controller
                     'expires_at' => Carbon::parse($expires_at),
                     'username' => $user->username,
                     'email' => $user->email,
-                    'role_prefix' => $user->role_prefix
+                    'role_prefix' => $user->role_prefix,
+                    'app_name' => $sys_param->app_name,
+                    'version' => $sys_param->version,
+                    'sys_date' => $sys_param->sys_date
                 ], 200);
             }else{
                 return response()->json(['validate' => false]);
