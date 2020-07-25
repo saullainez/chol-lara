@@ -19,6 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middlweare' => 'cors'], function (){
+    //SALG Rutas de inicio y cierre de sesión
     Route::post('login', 'Auth@doLogin');
     Route::post('logout', 'Auth@doLogout');
+    //SALG MÓDULOS
+    Route::get('modules', 'ModuleController@allModules'); //Obtener todos los módulos
+    Route::get('modules/{role}', 'ModuleController@roleModules'); //Obtener los módulos para ese rol
 });
