@@ -86,7 +86,7 @@ class UsersController extends Controller
                 $user->estatus = 'A';
                 $user->created_at = $now;
                 $user->updated_at = $now;
-                $user->password = Hash::make('password');;
+                $user->password = Hash::make('password');
                 $user->save();
                 return response()->json([
                     'userError' => false,
