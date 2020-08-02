@@ -41,5 +41,16 @@ Route::group(['middlweare' => 'cors'], function (){
         //Obtener los roles
         Route::get('roles-select', 'RolesController@getRolesSelect');
         Route::get('roles', 'RolesController@getRoles');
+
+        //SALG Rutas para opciones de menú
+        Route::get('permission_menu', 'PermissionMenuController@getPermissionMenu');
+        //Obtener las opciones de menú según el rol y el módulo
+        Route::get('permission_menu_role_module/{role}/{module}', 'PermissionMenuController@getPermissionMenuRoleModule');
+        //guardar las opciones de menú para un rol y un módulo
+        Route::post('permission_menu', 'PermissionMenuController@savePermissionMenu');
+
+        //SALG Rutas para módulos
+        //Obtener los módulos
+        Route::get('modules-select', 'SegModulesController@getModulesSelect');
     });
 });
