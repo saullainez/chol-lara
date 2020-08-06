@@ -18,7 +18,7 @@ class PermissionMenuController extends Controller
     * Retorna un json con los datos de los permisos a opciones de menú
     */
     public function getPermissionMenu(){
-        $permissions_menu = PermissionMenu::select('permission_menu.id', 'permission_menu.mod_prefix as module', 'sm.description as sub_menu_desc', 'm.description as menu_desc', 'permission_menu.rol_prefix as role')
+        $permissions_menu = PermissionMenu::select('permission_menu.id', 'permission_menu.mod_prefix as module', 'sm.description as description', 'm.description as menu_desc', 'permission_menu.rol_prefix as role')
         ->join('sub_menu as sm', 'sm.id', 'permission_menu.sub_menu_id')
         ->join('menu as m', 'm.id', 'sm.id_menu')
         ->where('estatus', 'A')->get();
@@ -30,7 +30,7 @@ class PermissionMenuController extends Controller
     * Retorna un json con los datos de las opciones de menú asignadas y no asignadas, según el rol y el módulo
     */
     public function getPermissionMenuRoleModule($role, $module){
-        $permissions_menuA = SubMenu::select('sub_menu.id', 'sub_menu.id_menu', 'sub_menu.description as sub_menu_desc', 'sub_menu.icon as sub_menu_icon')
+        $permissions_menuA = SubMenu::select('sub_menu.id', 'sub_menu.id_menu', 'sub_menu.description as description', 'sub_menu.icon as sub_menu_icon')
         ->join('menu as m', 'm.id', 'sub_menu.id_menu')
         ->join('permission_menu as pm', 'pm.sub_menu_id', 'sub_menu.id')
         ->where('m.mod_prefix', $module)
@@ -38,7 +38,7 @@ class PermissionMenuController extends Controller
         ->where('pm.estatus', 'A')->get();
         
 
-        $permissions_menuNA = SubMenu::selectRaw("DISTINCT sub_menu.id, sub_menu.id_menu, sub_menu.description as sub_menu_desc, sub_menu.icon as sub_menu_icon")
+        $permissions_menuNA = SubMenu::selectRaw("DISTINCT sub_menu.id, sub_menu.id_menu, sub_menu.description as description, sub_menu.icon as sub_menu_icon")
         ->join('menu as m', 'm.id', 'sub_menu.id_menu')
         ->leftJoin('permission_menu as pm', 'pm.sub_menu_id', 'sub_menu.id')
         ->where('m.mod_prefix', $module)
@@ -89,6 +89,7 @@ class PermissionMenuController extends Controller
                 ->where('estatus', 'I')->first();
                 if($permission_menu_unactive){
                     $permission_menu_unactive->estatus='A';
+                    $permission_menu_unactive->updated_at=$now;
                     $permission_menu_unactive->save();
                 }else{
                     $new_permission_menu = new PermissionMenu();

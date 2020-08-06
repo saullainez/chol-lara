@@ -52,5 +52,13 @@ Route::group(['middlweare' => 'cors'], function (){
         //SALG Rutas para módulos
         //Obtener los módulos
         Route::get('modules-select', 'SegModulesController@getModulesSelect');
+
+        //SALG Rutas para permisos de módulos a roles
+        //Obtener todos permisos de módulos a roles
+        Route::get('role_module', 'RoleModuleController@getRoleModule');
+        //Obtener los permisos de módulos a roles según el rol
+        Route::get('permission_role_module/{role}', 'RoleModuleController@getPermissionRoleModule');
+        //guardar los permisos a módulos para un rol
+        Route::post('role_module', 'RoleModuleController@saveRoleModule');
     });
 });
