@@ -42,6 +42,17 @@ Route::group(['middlweare' => 'cors'], function (){
         Route::get('roles-select', 'RolesController@getRolesSelect');
         Route::get('roles', 'RolesController@getRoles');
 
+        //obtener un rol dado su id
+        Route::get('roles/{id}','RolesController@getRoleId');
+        //guarda un nuevo rol
+        Route::post('roles', 'RolesController@CreateRole');
+        //elimina un rol
+        
+        Route::delete('roles/{id}', 'RolesController@deactiveRole');
+        //actualiza un rol
+        Route::put('roles','RolesController@editRole');
+
+
         //SALG Rutas para opciones de menú
         Route::get('permission_menu', 'PermissionMenuController@getPermissionMenu');
         //Obtener las opciones de menú según el rol y el módulo
