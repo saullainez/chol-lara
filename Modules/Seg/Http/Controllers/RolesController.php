@@ -127,7 +127,7 @@ class RolesController extends Controller
         $role->updated_at = Carbon::now();
         $role->save();
         
-        $roles = Role::select('prefix as value', 'prefix as description')
+        $roles = Role::select('id', 'prefix', 'name', 'description')
         ->where('estatus','A')
         ->get();
         return response()->json(['roles' => $roles]);
